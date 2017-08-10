@@ -16,10 +16,13 @@ var bobPrivKey = privKey2;
 var aliceAddress = alicePrivKey.getAddress();
 var bobAddress = bobPrivKey.getAddress();
 
+
+console.log("3 encoded = ", bitcoin.script.number.encode(3));
+console.log("5 encoded = ", bitcoin.script.number.encode(5));
 var redeemScript = bitcoin.script.compile([
-    3,
+    bitcoin.script.number.encode(3),
     bitcoin.opcodes.OP_ADD,
-    5,
+    bitcoin.script.number.encode(5),
     bitcoin.opcodes.OP_EQUAL
 ]);
 var scriptPubKey = bitcoin.script.scriptHash.output.encode(bitcoin.crypto.hash160(redeemScript))
@@ -27,17 +30,21 @@ var address = bitcoin.address.fromOutputScript(scriptPubKey, testnet);
 
 console.error("address = ", address);
 
-var txid = '7f7b9c003078556b9b9a058fceefdbede413b91cc6aa963bab2692b3c73b89bb';
-var return_address = 'myUMzCSWHivWdv4MFNygdqeTh17N3G74k3'
+var txid = '4a9c85372f46a07b24f389d434abcbff8c1ff2edecd5a2284c54c856f852fda1';
+var return_address = 'mffVPNekSwA8JPxWUcweG1Vv96irkwgVPV'
 var tx = new bitcoin.TransactionBuilder(testnet)
      tx.addInput(txid, 1)
      tx.addOutput(return_address, 500)
 
+//tx.sign(0, alicePrivKey);
+
 var txRaw = tx.buildIncomplete()
 
 var redeemScriptSig = bitcoin.script.scriptHash.input.encode([
-        2
+        bitcoin.script.number.encode(2)
       ], redeemScript)
+
+console.log("redeem script sig = ", redeemScriptSig);
 
 txRaw.setInputScript(0, redeemScriptSig)
 
