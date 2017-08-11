@@ -1,5 +1,8 @@
 var bitcoin = require('bitcoinjs-lib');
 
+//https://live.blockcypher.com/btc-testnet/address/2N6funkq162Brfo8QrBJPn9pUZN69eh4ycr/
+//https://live.blockcypher.com/btc-testnet/tx/954f42ef7046afefae02cc0410524c2b45faf71c5d2c077c170a79aac9c5a757/
+
 var testnet = bitcoin.networks.testnet;
 
 // derive masterkey
