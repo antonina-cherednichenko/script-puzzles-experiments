@@ -16,11 +16,11 @@ var masterKey = bitcoin.HDNode.fromSeedBuffer(Buffer.from('zzzzzzzzzzzzzzzzzzzzz
 // var aliceAddress = alicePrivKey.getAddress();
 // var bobAddress = bobPrivKey.getAddress();
 
-let aliceSecret = Buffer.from('zzzzzzzzzzzzzzzzzzzzzzzzzz');
+let aliceSecret = Buffer.from('zzzzzzzzzzzzzzzzzzzzzzzzzzfddffd');
 let aliceSecretHash = bitcoin.crypto.hash160(aliceSecret);
 console.log('alice secret = ', aliceSecret);
 
-let addressToSentromScript = 'myUMzCSWHivWdv4MFNygdqeTh17N3G74k3'
+let addressToSentromScript = 'mffVPNekSwA8JPxWUcweG1Vv96irkwgVPV'
 
 var aliceToBobRedeemScript = bitcoin.script.compile([
     bitcoin.opcodes.OP_HASH160,
@@ -45,7 +45,7 @@ function redeemBTCFromScript(txid, inputNum) {
 
   var txb = new bitcoin.TransactionBuilder(testnet)
   txb.addInput(txid, inputNum)
-  txb.addOutput(addressToSentromScript, 700)
+  txb.addOutput(addressToSentromScript, 10000)
 
   var txRaw = txb.buildIncomplete()
   // var signatureHash = txRaw.hashForSignature(0, redeemScript, hashType)
@@ -61,7 +61,7 @@ function redeemBTCFromScript(txid, inputNum) {
 }
 
 createP2SH();
-redeemBTCFromScript('8e13d78ec4112abf7f6cfb6a5ecf7ba759a278884316c7b9d9134b1abfc8830f', 0)
+redeemBTCFromScript('6be26474b8f151558b6e8aab5da47a9557b2a800682a2738a4e84393646d26e1', 0)
 
 
 
